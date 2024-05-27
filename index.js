@@ -3,6 +3,7 @@ import connectDB from './db.js';
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/users.js";
 
 
 const app = express();
@@ -13,6 +14,7 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 //error handler
 app.use((err, req, res, next) => {
