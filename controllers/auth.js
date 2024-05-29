@@ -5,13 +5,10 @@ import jwt from "jsonwebtoken";
 
 export const createUser = async (req, res, next) => {
     try {
-        if (req.user.role !== 'admin') {
-            return res.status(403).json({ message: 'Only admins can create employee accounts' });
-        }
-        const userExists = await User.findOne({ role: 'admin' });
+        const userExists = await User.findOne({ email: req.body.email });
 
-        if (req.body.role === 'admin' && userExists) {
-            return res.status(400).json({ message: 'Admin user already exists' });
+        if (userExists) {
+            return res.status(400).json({ message: 'User already exists' });
         }
 
         const salt = bcrypt.genSaltSync(10);
@@ -29,14 +26,14 @@ export const createUser = async (req, res, next) => {
 
 export const userLogin = async (req, res, next) => {
     try {
-        const user = await User.findOne({ username: req.body.username });
+        const user = await User.findOne({ email: req.body.email });
         if (!user) return next(createError(404, "User not found!"));
 
         const isCorrect = await bcrypt.compare(req.body.password, user.password);
 
         if (!isCorrect) return next(createError(400, "Wrong Credentials!"));
 
-        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT);
+        const token = jwt.sign({ id: user._id }, process.env.JWT);
 
         const { password, ...others } = user._doc;
 
