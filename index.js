@@ -14,11 +14,12 @@ const app = express();
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
-  }));
+}));
 connectDB();
 
 // middlewares
 app.use(express.json());
+// cookie parser middleware
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
