@@ -12,7 +12,10 @@ import transferRoutes from './routes/transfer.js';
 
 const app = express();
 dotenv.config();
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    credentials: true,
+}));
 connectDB();
 
 // middlewares
