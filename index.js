@@ -1,4 +1,5 @@
 import express from "express";
+import dotenv from "dotenv";
 import connectDB from './db.js';
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -9,8 +10,8 @@ import storeRoutes from './routes/store.js';
 import warehouseRoutes from './routes/warehouse.js';
 import transferRoutes from './routes/transfer.js';
 
-
 const app = express();
+dotenv.config();
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,

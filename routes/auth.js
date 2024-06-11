@@ -1,12 +1,12 @@
 import express from "express";
 import { createUser, userLogin } from "../controllers/auth.js";
-import { verifyToken } from "../verifyToken.js";
+import { verifyToken, verifyUser } from "../verifyToken.js";
 
 const router = express.Router();
 
 // check auth
-router.get('/check-status', verifyToken, (req, res) => {
-    res.status(200).json({ message: 'User is authenticated' });
+router.get('/check-status', verifyUser, (req, res, next) => {
+    res.send('hello you are authenticated')
 });
 
 //CREATE A USER
