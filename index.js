@@ -12,10 +12,7 @@ import transferRoutes from './routes/transfer.js';
 
 const app = express();
 dotenv.config();
-app.use(cors({
-    origin: 'https://warehouse-frontend-x3m-labs.vercel.app',
-    credentials: true,
-}));
+app.use(cors());
 connectDB();
 
 // middlewares
