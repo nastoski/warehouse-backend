@@ -40,6 +40,8 @@ export const userLogin = async (req, res, next) => {
         res
             .cookie("access_token", token, {
                 httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'Strict',
             })
             .status(200)
             .json(others);
