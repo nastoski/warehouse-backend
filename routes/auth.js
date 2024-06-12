@@ -1,12 +1,12 @@
 import express from "express";
 import { createUser, userLogin } from "../controllers/auth.js";
-import { verifyUser } from "../verifyToken.js";
+import { verifyToken } from "../verifyToken.js";
 
 const router = express.Router();
 
 // check auth
-router.get('/check-status', verifyUser, (req, res, next) => {
-    res.send('hello you are authenticated')
+router.get('/check-status', verifyToken, (req, res) => {
+    res.status(200).json({ user: req.user });
 });
 
 //CREATE A USER
@@ -19,8 +19,6 @@ router.post("/login", userLogin);
 router.post('/logout', (req, res) => {
     res.clearCookie('access_token', {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'Strict',
     });
     res.status(200).json({ message: 'Logged out successfully' });
 });
