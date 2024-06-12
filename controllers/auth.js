@@ -40,6 +40,11 @@ export const userLogin = async (req, res, next) => {
         res
             .cookie("access_token", token, {
                 httpOnly: true,
+                secure: true,
+                domain: 'warehouse-backend-x3m-labs.vercel.app',
+                sameSite: 'None',
+                path: '/',
+                expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
             })
             .status(200)
             .json(others);
