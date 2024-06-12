@@ -40,9 +40,6 @@ export const userLogin = async (req, res, next) => {
         res
             .cookie("access_token", token, {
                 httpOnly: true,
-                secure: true,
-                domain: 'warehouse-backend-x3m-labs.vercel.app',
-                path: '/',
             })
             .status(200)
             .json(others);
