@@ -42,7 +42,6 @@ export const userLogin = async (req, res, next) => {
                 httpOnly: true,
                 secure: true,
                 domain: 'warehouse-backend-x3m-labs.vercel.app',
-                sameSite: 'Lax',
                 path: '/',
             })
             .status(200)

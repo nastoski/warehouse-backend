@@ -21,7 +21,6 @@ router.post('/logout', (req, res) => {
         httpOnly: true,
         secure: true,
         domain: 'warehouse-backend-x3m-labs.vercel.app',
-        sameSite: 'Lax',
         path: '/',
     });
     res.status(200).json({ message: 'Logged out successfully' });
