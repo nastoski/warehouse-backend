@@ -17,7 +17,12 @@ router.post("/login", userLogin);
 
 // clear token on logout
 router.post('/logout', (req, res) => {
-    res.clearCookie('access_token', { path: '/', domain: 'warehouse-backend-x3m-labs.vercel.app', secure: true, sameSite: 'None' });
+    res.clearCookie('access_token', {
+        httpOnly: true,
+        path: '/',
+        domain: 'warehouse-backend-x3m-labs.vercel.app',secure: true,
+        sameSite: 'None'
+    });
     res.status(200).json({ message: 'Logged out successfully' });
 });
 
